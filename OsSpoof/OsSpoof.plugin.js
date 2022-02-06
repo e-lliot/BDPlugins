@@ -5,7 +5,7 @@
  * @description Spoofs your client's operating system!
 Based on Kyza's PlatformEmulator.
  * @source https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof
- * @updateUrl https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/PlatformEmulator/OsSpoof.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js
  */
 /*@cc_on
 @if (@_jscript)
@@ -47,7 +47,7 @@ const config = {
 		"version": "1.0.0",
 		"description": "Spoofs your client's operating system!\nBased on Kyza's PlatformEmulator.",
 		"github": "https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof",
-		"github_raw": "https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/PlatformEmulator/OsSpoof.plugin.js"
+		"github_raw": "https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js"
 	},
 	"build": {
 		"copy": true,
