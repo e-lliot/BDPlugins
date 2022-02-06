@@ -1,0 +1,30 @@
+{
+    "info": {
+        "name": "OsSpoof",
+        "authors": [
+			{
+				"name": "Kyza",
+				"discord_id": "220584715265114113",
+				"github_username": "Kyza"
+			},
+            {
+                "name": "AduMaster",
+                "discord_id": "380638507955257345",
+                "github_username": "trungnt2910"
+            }
+        ],
+        "version": "1.0.0",
+        "description": "Spoofs your client's operating system!\nBased on Kyza's PlatformEmulator.",
+        "github": "https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof",
+        "github_raw": "https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/PlatformEmulator/OsSpoof.plugin.js"
+    },
+    "build": {
+        "copy": true,
+        "zlibrary": true,
+        "watch": true,
+        "release": {
+            "source": true,
+            "public": true
+        }
+    }
+}

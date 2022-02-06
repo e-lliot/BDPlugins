@@ -6,7 +6,7 @@ name: Autobuild Plugins
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
     inputs:
       plugin:

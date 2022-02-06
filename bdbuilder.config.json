@@ -6,16 +6,16 @@
         "filename": "[name].plugin.js"
     },
     "discord": {
-        "userId": "264062457448759296",
-        "username": "A user"
+        "userId": "380638507955257345",
+        "username": "AduMaster"
     },
     "github": {
-        "username": "abUwUser",
+        "username": "trungnt2910",
         "branch": "master",
         "repo": "BDPlugins"
     },
     "paths": {
-        "bdfolder": "C:/Users/auser/AppData/Roaming/BetterDiscord",
+        "bdfolder": "C:/Users/Trung/AppData/Roaming/BetterDiscord",
         "release_folder": "<seret>"
     }
 }

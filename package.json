@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abUwUser/BDPlugins.git"
+    "url": "git+https://github.com/trungnt2910/BDPlugins.git"
   },
-  "author": "A user",
-  "license": "CC0-1.0",
+  "author": "Trung Nguyen",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/abUwUser/BDPlugins/issues"
+    "url": "https://github.com/trungnt2910/BDPlugins/issues"
   },
-  "homepage": "https://github.com/abUwUser/BDPlugins#readme",
+  "homepage": "https://github.com/trungnt2910/BDPlugins#readme",
   "description": "",
   "dependencies": {
     "@types/lodash": "^4.14.177",
