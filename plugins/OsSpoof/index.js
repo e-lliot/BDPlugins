@@ -1,16 +1,10 @@
-import { Patcher, WebpackModules } from "@zlibrary";
+import { Patcher } from "@zlibrary";
 import BasePlugin from "@zlibrary/plugin";
-import Settings from "./Settings.jsx";
 import forceUpdateApp from "./forceUpdateApp.js";
-import { get } from "./storage.js";
-import { Platforms } from "./Platforms.js";
+import { set, get } from "./storage.js";
 import { discordWebSocket, webSocketValid } from "./WebSocket.js";
-
-const Platform = WebpackModules.getModule((m) => m.PlatformTypes?.WINDOWS);
-
-const Packer = WebpackModules.getModule((m) =>
-	m.prototype?.hasOwnProperty("unpack")
-).prototype;
+import erlpack from 'erlpackjs'
+import { getRealPlatform, updateSpoofPlatform } from "./platform.js";
 
 let websocketInited = false;
 
@@ -20,21 +14,15 @@ export default class OsSpoof extends BasePlugin {
 	onStart() {
 		console.log("[OsSpoof] Initializing...");
 
-		for (const [functionName, platformName] of Object.entries(Platforms)) {
-			Patcher.instead(
-				Platform,
-				`is${functionName}`,
-				(that, args, t) => {
-					return get("platform").toLowerCase() === platformName.toLowerCase();
-				}
-			);
-		}
-		
+		const spoofPlatform = get("platform") || getRealPlatform();
+		updateSpoofPlatform(spoofPlatform);
+
 		Patcher.before(WebSocket.prototype, "send", (that, args) => {
 			if (!(args[0] instanceof ArrayBuffer)) return;
-			const data = Packer.unpack(args[0]);
 
-			if (that.url.startsWith("wss://gateway.discord.gg"))
+			const data = erlpack.unpack(args[0]);
+
+			if (that.url.startsWith("wss://gateway") && (that.url.indexOf("discord.gg") != -1))
 			{
 				// We're assuming that there's _only_ **one** WebSocket to Discord's server.
 				if (!webSocketValid)
@@ -46,7 +34,7 @@ export default class OsSpoof extends BasePlugin {
 					return args;
 				}
 			}
-			
+
 			if (data.op === 6 && !websocketInited) {
 				console.log("[OsSpoof] Blocking resume with dumb session ID...");
 				data.d.session_id = genRanHex(32);
@@ -88,7 +76,7 @@ export default class OsSpoof extends BasePlugin {
 				discordWebSocket = that;
 			}
 
-			args[0] = Packer.pack(data);
+			args[0] = erlpack.pack(data);
 
 			return args;
 		});
@@ -101,6 +89,18 @@ export default class OsSpoof extends BasePlugin {
 	}
 
 	getSettingsPanel() {
-		return <Settings />;
+		const panel = this.buildSettingsPanel();
+		panel.addListener(this.updateSettings.bind(this));
+		return panel.getElement();
+	}
+
+	updateSettings(group, id, value) {
+		set(group, id);
+		if (group == "websocket") {
+			webSocketValid = false;
+		}
+		else if (group == "platform") {
+			updateSpoofPlatform(id);
+		}
 	}
 }

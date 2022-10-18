@@ -1,21 +1,19 @@
-import { WebpackModules, PluginUtilities } from "@zlibrary";
-import { getPlatform } from "./Platforms.js";
-const Platform = WebpackModules.getModule((m) => m.PlatformTypes?.WINDOWS);
+import { Utilities } from "@zlibrary";
 
-const storage = PluginUtilities.loadData("OsSpoof", "settings", {
-	platform: getPlatform(Platform.getPlatform()),
+const storage = Utilities.loadData("OsSpoof", "settings", {
+	platform: "win32",
 	websocket: "default",
 });
 
 export function set(path, value) {
 	_.set(storage, path, value);
-	PluginUtilities.saveData("OsSpoof", "settings", storage);
+	Utilities.saveData("OsSpoof", "settings", storage);
 	return storage;
 }
 
 export function get(path, defaultValue) {
 	return _.get(
-		PluginUtilities.loadData("OsSpoof", "settings", storage),
+		Utilities.loadData("OsSpoof", "settings", storage),
 		path,
 		defaultValue
 	);

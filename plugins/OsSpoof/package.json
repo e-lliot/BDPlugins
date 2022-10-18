@@ -13,11 +13,47 @@
                 "github_username": "trungnt2910"
             }
         ],
-        "version": "1.0.0",
-        "description": "Spoofs your client's operating system!\nBased on Kyza's PlatformEmulator.",
+        "version": "1.0.1",
+        "description": "Spoofs your client's operating system! Based on Kyza's PlatformEmulator.",
         "github": "https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof",
         "github_raw": "https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js"
     },
+    "defaultConfig": [
+        {
+            "type": "radio",
+            "id": "platform",
+            "name": "UI Spoof platform",
+            "note": "Fools the user agent processor library of the Discord client to match the selected platform.",
+            "value": null,
+            "options": [
+                { "name": "Windows", "value": "win32" },
+                { "name": "OSX", "value": "darwin" },
+                { "name": "Linux", "value": "linux" }
+            ]
+        },
+        {
+            "type": "radio",
+            "id": "websocket",
+            "name": "WebSocket Spoof platform",
+            "note": "Fools the Discord WebSocket client to report the selected platform.",
+            "value": null,
+            "options": [
+                {"name": "Default", "value": "default" },
+                {"name": "Windows", "value": "win32" },
+                {"name": "OSX", "value": "darwin" },
+                {"name": "Linux", "value": "linux" },
+                {"name": "TempleOS", "value": "temple" },
+                {"name": "HaikuOS", "value": "haiku" },
+                {"name": "Web", "value": "web" },
+                {"name": "Android", "value": "android" },
+                {"name": "iOS", "value": "ios" },
+                {"name": "Windows 10 Mobile", "value": "wp" }
+            ]
+        }
+    ],
+    "changelog": [
+        {"title": "Bugfixes", "type": "fixed", "items": ["Plugin should now work with the new BetterDiscord."]}
+    ],
     "build": {
         "copy": true,
         "zlibrary": true,
