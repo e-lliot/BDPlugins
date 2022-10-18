@@ -1,9 +1,8 @@
 /**
  * @name OsSpoof
  * @author Kyza, AduMaster
- * @version 1.0.0
- * @description Spoofs your client's operating system!
-Based on Kyza's PlatformEmulator.
+ * @version 1.0.1
+ * @description Spoofs your client's operating system! Based on Kyza's PlatformEmulator.
  * @source https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof
  * @updateUrl https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js
  */
@@ -44,11 +43,87 @@ const config = {
 				"github_username": "trungnt2910"
 			}
 		],
-		"version": "1.0.0",
-		"description": "Spoofs your client's operating system!\nBased on Kyza's PlatformEmulator.",
+		"version": "1.0.1",
+		"description": "Spoofs your client's operating system! Based on Kyza's PlatformEmulator.",
 		"github": "https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof",
 		"github_raw": "https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js"
 	},
+	"defaultConfig": [{
+			"type": "radio",
+			"id": "platform",
+			"name": "UI Spoof platform",
+			"note": "Fools the user agent processor library of the Discord client to match the selected platform.",
+			"value": null,
+			"options": [{
+					"name": "Windows",
+					"value": "win32"
+				},
+				{
+					"name": "OSX",
+					"value": "darwin"
+				},
+				{
+					"name": "Linux",
+					"value": "linux"
+				}
+			]
+		},
+		{
+			"type": "radio",
+			"id": "websocket",
+			"name": "WebSocket Spoof platform",
+			"note": "Fools the Discord WebSocket client to report the selected platform.",
+			"value": null,
+			"options": [{
+					"name": "Default",
+					"value": "default"
+				},
+				{
+					"name": "Windows",
+					"value": "win32"
+				},
+				{
+					"name": "OSX",
+					"value": "darwin"
+				},
+				{
+					"name": "Linux",
+					"value": "linux"
+				},
+				{
+					"name": "TempleOS",
+					"value": "temple"
+				},
+				{
+					"name": "HaikuOS",
+					"value": "haiku"
+				},
+				{
+					"name": "Web",
+					"value": "web"
+				},
+				{
+					"name": "Android",
+					"value": "android"
+				},
+				{
+					"name": "iOS",
+					"value": "ios"
+				},
+				{
+					"name": "Windows 10 Mobile",
+					"value": "wp"
+				}
+			]
+		}
+	],
+	"changelog": [{
+		"title": "Bugfixes",
+		"type": "fixed",
+		"items": [
+			"Plugin should now work with the new BetterDiscord."
+		]
+	}],
 	"build": {
 		"copy": true,
 		"zlibrary": true,
@@ -140,7 +215,7 @@ function buildPlugin([BasePlugin, PluginApi]) {
 					return ___createMemoize___(this, 'Flex', () => BdApi.findModuleByDisplayName('Flex'))
 				},
 				get 'Text'() {
-					return ___createMemoize___(this, 'Text', () => BdApi.findModuleByDisplayName('Text'))
+					return ___createMemoize___(this, 'Text', () => BdApi.findModuleByDisplayName('LegacyText'))
 				},
 				get 'Card'() {
 					return ___createMemoize___(this, 'Card', () => BdApi.findModuleByDisplayName('Card'))
@@ -148,7 +223,7 @@ function buildPlugin([BasePlugin, PluginApi]) {
 			},
 			'@discord/modules': {
 				get 'Dispatcher'() {
-					return ___createMemoize___(this, 'Dispatcher', () => BdApi.findModuleByProps('dirtyDispatch', 'subscribe'))
+					return ___createMemoize___(this, 'Dispatcher', () => BdApi.findModuleByProps('dispatch', 'isDispatching'))
 				},
 				get 'ComponentDispatcher'() {
 					return ___createMemoize___(this, 'ComponentDispatcher', () => BdApi.findModuleByProps('ComponentDispatch')?.ComponentDispatch)
@@ -271,8 +346,403 @@ function buildPlugin([BasePlugin, PluginApi]) {
 			}
 		};
 		var __webpack_modules__ = {
-			113: module => {
-				module.exports = BdApi.React;
+			680: (__unused_webpack_module, exports) => {
+				Object.defineProperty(exports, "__esModule", {
+					value: true
+				});
+				exports["default"] = {
+					FORMAT_VERSION: 131,
+					NEW_FLOAT_EXT: 70,
+					BIT_BINARY_EXT: 77,
+					SMALL_INTEGER_EXT: 97,
+					INTEGER_EXT: 98,
+					FLOAT_EXT: 99,
+					ATOM_EXT: 100,
+					REFERENCE_EXT: 101,
+					PORT_EXT: 102,
+					PID_EXT: 103,
+					SMALL_TUPLE_EXT: 104,
+					LARGE_TUPLE_EXT: 105,
+					NIL_EXT: 106,
+					STRING_EXT: 107,
+					LIST_EXT: 108,
+					BINARY_EXT: 109,
+					SMALL_BIG_EXT: 110,
+					LARGE_BIG_EXT: 111,
+					NEW_FUN_EXT: 112,
+					EXPORT_EXT: 113,
+					NEW_REFERENCE_EXT: 114,
+					SMALL_ATOM_EXT: 115,
+					MAP_EXT: 116,
+					FUN_EXT: 117,
+					COMPRESSED: 80
+				};
+			},
+			699: function(__unused_webpack_module, exports, __webpack_require__) {
+				var __importDefault = this && this.__importDefault || function(mod) {
+					return mod && mod.__esModule ? mod : {
+						default: mod
+					};
+				};
+				Object.defineProperty(exports, "__esModule", {
+					value: true
+				});
+				const constants_1 = __importDefault(__webpack_require__(680));
+				const {
+					TextDecoder
+				} = "undefined" !== typeof window ? window : __webpack_require__(764);
+				const {
+					FORMAT_VERSION,
+					NEW_FLOAT_EXT,
+					SMALL_INTEGER_EXT,
+					INTEGER_EXT,
+					FLOAT_EXT,
+					ATOM_EXT,
+					SMALL_TUPLE_EXT,
+					LARGE_TUPLE_EXT,
+					NIL_EXT,
+					STRING_EXT,
+					LIST_EXT,
+					BINARY_EXT,
+					SMALL_BIG_EXT,
+					LARGE_BIG_EXT,
+					SMALL_ATOM_EXT,
+					MAP_EXT
+				} = constants_1.default;
+				const processAtom = atom => {
+					if (!atom) return;
+					if ("nil" === atom || "null" === atom) return null;
+					if ("true" === atom) return true;
+					if ("false" === atom) return false;
+					return atom;
+				};
+				class Decoder {
+					buffer;
+					view;
+					offset;
+					decoder;
+					bigintToString;
+					constructor(buffer, bigintToString) {
+						this.buffer = new Uint8Array(buffer);
+						this.view = new DataView(this.buffer.buffer);
+						this.offset = 0;
+						this.decoder = new TextDecoder("utf8");
+						this.bigintToString = bigintToString;
+						const version = this.read8();
+						if (version !== FORMAT_VERSION) throw new Error("Invalid version header");
+					}
+					read8() {
+						const val = this.view.getUint8(this.offset);
+						this.offset++;
+						return val;
+					}
+					readi8() {
+						const val = this.view.getInt8(this.offset);
+						this.offset++;
+						return val;
+					}
+					read16() {
+						const val = this.view.getUint16(this.offset);
+						this.offset += 2;
+						return val;
+					}
+					read32() {
+						const val = this.view.getUint32(this.offset);
+						this.offset += 4;
+						return val;
+					}
+					readi32() {
+						const val = this.view.getInt32(this.offset);
+						this.offset += 4;
+						return val;
+					}
+					readDouble() {
+						const val = this.view.getFloat64(this.offset);
+						this.offset += 8;
+						return val;
+					}
+					readString(length) {
+						const sub = this.buffer.subarray(this.offset, this.offset + length);
+						const str = this.decoder.decode(sub);
+						this.offset += length;
+						return str;
+					}
+					decodeArray(length) {
+						const array = [];
+						for (let i = 0; i < length; i++) array.push(this.unpack());
+						return array;
+					}
+					decodeBigNumber(digits) {
+						const sign = this.read8();
+						let value = 0;
+						let b = 1;
+						for (let i = 0; i < digits; i++) {
+							const digit = this.read8();
+							value += digit * b;
+							b <<= 8;
+						}
+						if (digits < 4) {
+							if (0 === sign) return value;
+							const isSignBitAvailable = 0 === (value & 1 << 31);
+							if (isSignBitAvailable) return -value;
+						}
+						return 0 === sign ? value : -value;
+					}
+					decodeBigInt(digits) {
+						const sign = this.read8();
+						let value = 0n;
+						let b = 1n;
+						for (let i = 0; i < digits; i++) {
+							const digit = BigInt(this.read8());
+							value += digit * b;
+							b <<= 8n;
+						}
+						const v = 0 === sign ? value : -value;
+						if (this.bigintToString) return v.toString();
+						return v;
+					}
+					unpack() {
+						const type = this.read8();
+						switch (type) {
+							case SMALL_INTEGER_EXT:
+								return this.readi8();
+							case INTEGER_EXT:
+								return this.readi32();
+							case FLOAT_EXT:
+								return Number.parseFloat(this.readString(31));
+							case NEW_FLOAT_EXT:
+								return this.readDouble();
+							case ATOM_EXT:
+								return processAtom(this.readString(this.read16()));
+							case SMALL_ATOM_EXT:
+								return processAtom(this.readString(this.read8()));
+							case SMALL_TUPLE_EXT:
+								return this.decodeArray(this.read8());
+							case LARGE_TUPLE_EXT:
+								return this.decodeArray(this.read32());
+							case NIL_EXT:
+								return [];
+							case STRING_EXT: {
+								const length = this.read16();
+								const sub = this.buffer.subarray(this.offset, this.offset + length);
+								this.offset += length;
+								return [...sub];
+							}
+							case LIST_EXT: {
+								const length = this.read32();
+								const array = this.decodeArray(length);
+								if (this.read8() !== NIL_EXT) throw new Error("Expected tail marker after list");
+								return array;
+							}
+							case MAP_EXT: {
+								const length = this.read32();
+								const map = {};
+								for (let i = 0; i < length; i++) map[this.unpack()] = this.unpack();
+								return map;
+							}
+							case BINARY_EXT: {
+								const length = this.read32();
+								return this.readString(length);
+							}
+							case SMALL_BIG_EXT: {
+								const digits = this.read8();
+								return digits >= 7 ? this.decodeBigInt(digits) : this.decodeBigNumber(digits);
+							}
+							case LARGE_BIG_EXT: {
+								const digits = this.read32();
+								return this.decodeBigInt(digits);
+							}
+							default:
+								throw new Error(`Unsupported etf type ${type}`);
+						}
+					}
+				}
+				exports["default"] = Decoder;
+			},
+			457: function(__unused_webpack_module, exports, __webpack_require__) {
+				var __importDefault = this && this.__importDefault || function(mod) {
+					return mod && mod.__esModule ? mod : {
+						default: mod
+					};
+				};
+				Object.defineProperty(exports, "__esModule", {
+					value: true
+				});
+				const constants_1 = __importDefault(__webpack_require__(680));
+				const {
+					TextEncoder
+				} = "undefined" !== typeof window ? window : __webpack_require__(764);
+				const {
+					FORMAT_VERSION,
+					NEW_FLOAT_EXT,
+					SMALL_INTEGER_EXT,
+					INTEGER_EXT,
+					ATOM_EXT,
+					NIL_EXT,
+					LIST_EXT,
+					BINARY_EXT,
+					LARGE_BIG_EXT,
+					SMALL_ATOM_EXT,
+					MAP_EXT
+				} = constants_1.default;
+				const BUFFER_CHUNK = 2048;
+				class Encoder {
+					buffer;
+					view;
+					encoder;
+					offset;
+					constructor() {
+						this.buffer = new Uint8Array(BUFFER_CHUNK);
+						this.view = new DataView(this.buffer.buffer);
+						this.encoder = new TextEncoder;
+						this.buffer[0] = FORMAT_VERSION;
+						this.offset = 1;
+					}
+					grow(length) {
+						if (this.offset + length < this.buffer.length) return;
+						const chunks = Math.ceil(length / BUFFER_CHUNK) * BUFFER_CHUNK;
+						const old = this.buffer;
+						this.buffer = new Uint8Array(old.length + chunks);
+						this.buffer.set(old);
+						this.view = new DataView(this.buffer.buffer);
+					}
+					write(array) {
+						this.grow(array.length);
+						this.buffer.set(array, this.offset);
+						this.offset += array.length;
+					}
+					write8(value) {
+						this.grow(1);
+						this.view.setUint8(this.offset, value);
+						this.offset++;
+					}
+					write16(value) {
+						this.grow(2);
+						this.view.setUint16(this.offset, value);
+						this.offset += 2;
+					}
+					write32(value) {
+						this.grow(4);
+						this.view.setUint32(this.offset, value);
+						this.offset += 4;
+					}
+					writeFloat(value) {
+						this.grow(8);
+						this.view.setFloat64(this.offset, value);
+						this.offset += 8;
+					}
+					appendAtom(atom) {
+						const a = this.encoder.encode(atom);
+						if (a.length < 255) {
+							this.write8(SMALL_ATOM_EXT);
+							this.write8(a.length);
+						} else {
+							this.write8(ATOM_EXT);
+							this.write16(a.length);
+						}
+						this.write(a);
+					}
+					pack(value) {
+						if (null === value || void 0 === value) {
+							this.appendAtom("nil");
+							return;
+						}
+						if ("boolean" === typeof value) {
+							this.appendAtom(value ? "true" : "false");
+							return;
+						}
+						if ("number" === typeof value) {
+							if ((0 | value) === value)
+								if (value > -128 && value < 128) {
+									this.write8(SMALL_INTEGER_EXT);
+									this.write8(value);
+								} else {
+									this.write8(INTEGER_EXT);
+									this.write32(value);
+								}
+							else {
+								this.write8(NEW_FLOAT_EXT);
+								this.writeFloat(value);
+							}
+							return;
+						}
+						if ("bigint" === typeof value) {
+							this.write8(LARGE_BIG_EXT);
+							const byteCountIndex = this.offset;
+							this.offset += 4;
+							this.write8(value < 0n ? 1 : 0);
+							let ull = value < 0n ? -value : value;
+							let byteCount = 0;
+							while (ull > 0) {
+								byteCount++;
+								this.write8(Number(0xffn & ull));
+								ull >>= 8n;
+							}
+							this.view.setUint32(byteCountIndex, byteCount);
+							return;
+						}
+						if ("string" === typeof value) {
+							this.write8(BINARY_EXT);
+							const a = this.encoder.encode(value);
+							this.write32(a.length);
+							this.write(a);
+							return;
+						}
+						if (Array.isArray(value)) {
+							const {
+								length
+							} = value;
+							if (0 === length) {
+								this.write8(NIL_EXT);
+								return;
+							}
+							this.write8(LIST_EXT);
+							this.write32(length);
+							value.forEach((v => {
+								this.pack(v);
+							}));
+							this.write8(NIL_EXT);
+							return;
+						}
+						if ("object" === typeof value) {
+							this.write8(MAP_EXT);
+							const properties = Object.keys(value);
+							this.write32(properties.length);
+							properties.forEach((p => {
+								this.pack(p);
+								this.pack(value[p]);
+							}));
+							return;
+						}
+						throw new Error("Could not pack value");
+					}
+				}
+				exports["default"] = Encoder;
+			},
+			121: function(module, __unused_webpack_exports, __webpack_require__) {
+				var __importDefault = this && this.__importDefault || function(mod) {
+					return mod && mod.__esModule ? mod : {
+						default: mod
+					};
+				};
+				const encoder_1 = __importDefault(__webpack_require__(457));
+				const decoder_1 = __importDefault(__webpack_require__(699));
+				module.exports = {
+					pack: data => {
+						const encoder = new encoder_1.default;
+						encoder.pack(data);
+						return encoder.buffer.slice(0, encoder.offset);
+					},
+					unpack: (buffer, {
+						bigintToString = false
+					} = {}) => {
+						const decoder = new decoder_1.default(buffer, bigintToString);
+						return decoder.unpack();
+					}
+				};
+			},
+			764: module => {
+				module.exports = require("util");
 			}
 		};
 		var __webpack_module_cache__ = {};
@@ -282,7 +752,7 @@ function buildPlugin([BasePlugin, PluginApi]) {
 			var module = __webpack_module_cache__[moduleId] = {
 				exports: {}
 			};
-			__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+			__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 			return module.exports;
 		}
 		(() => {
@@ -325,137 +795,92 @@ function buildPlugin([BasePlugin, PluginApi]) {
 			const external_PluginApi_namespaceObject = PluginApi;
 			const external_BasePlugin_namespaceObject = BasePlugin;
 			var external_BasePlugin_default = __webpack_require__.n(external_BasePlugin_namespaceObject);
-			const Platforms = {
-				Linux: "linux",
-				OSX: "darwin",
-				Web: "web",
-				Windows: "win32"
-			};
-			function getPlatform(platform) {
-				for (let key in Platforms)
-					if (key.toLowerCase() === platform.toLowerCase()) return Platforms[key];
-				return null;
-			}
-			const Platform = external_PluginApi_namespaceObject.WebpackModules.getModule((m => m.PlatformTypes?.WINDOWS));
-			const storage = external_PluginApi_namespaceObject.PluginUtilities.loadData("OsSpoof", "settings", {
-				platform: getPlatform(Platform.getPlatform()),
-				websocket: "default"
-			});
-			function set(path, value) {
-				_.set(storage, path, value);
-				external_PluginApi_namespaceObject.PluginUtilities.saveData("OsSpoof", "settings", storage);
-				return storage;
-			}
-			function get(path, defaultValue) {
-				return _.get(external_PluginApi_namespaceObject.PluginUtilities.loadData("OsSpoof", "settings", storage), path, defaultValue);
-			}
 			function forceUpdateApp() {
 				let root = document.getElementById("app-mount")._reactRootContainer._internalRoot.current;
-				while ("App" !== root?.type?.displayName) {
+				while (null != root && "App" !== root?.type?.displayName) {
 					root?.stateNode?.forceUpdate?.();
 					root = root.child;
 				}
 			}
+			const storage = external_PluginApi_namespaceObject.Utilities.loadData("OsSpoof", "settings", {
+				platform: "win32",
+				websocket: "default"
+			});
+			function set(path, value) {
+				_.set(storage, path, value);
+				external_PluginApi_namespaceObject.Utilities.saveData("OsSpoof", "settings", storage);
+				return storage;
+			}
+			function get(path, defaultValue) {
+				return _.get(external_PluginApi_namespaceObject.Utilities.loadData("OsSpoof", "settings", storage), path, defaultValue);
+			}
 			let webSocketValid = false;
 			let discordWebSocket;
-			var React = __webpack_require__(113);
-			const {
-				useState
-			} = React;
-			const Header = external_PluginApi_namespaceObject.WebpackModules.getByDisplayName("HeaderBar");
-			const FormDivider = external_PluginApi_namespaceObject.WebpackModules.getByDisplayName("FormDivider");
-			const RadioGroup = external_PluginApi_namespaceObject.WebpackModules.getByDisplayName("RadioGroup");
-			function Settings() {
-				const [platform, setPlatform] = useState(get("platform"));
-				const [websocket, setWebsocket] = useState(get("websocket"));
-				return React.createElement(React.Fragment, null, React.createElement(Header, null, "UI Spoof"), React.createElement(FormDivider, {
-					style: {
-						marginTop: "8px",
-						marginBottom: "8px"
-					}
-				}), React.createElement(RadioGroup, {
-					options: [{
-						name: "Windows",
-						value: "win32"
-					}, {
-						name: "OSX",
-						value: "darwin"
-					}, {
-						name: "Linux",
-						value: "linux"
-					}],
-					value: platform,
-					onChange: e => {
-						if (e.value !== platform) {
-							setPlatform(e.value);
-							set("platform", e.value);
-							forceUpdateApp();
-						}
-					}
-				}), React.createElement(Header, null, "WebSocket Spoof"), React.createElement(FormDivider, {
-					style: {
-						marginTop: "8px",
-						marginBottom: "8px"
-					}
-				}), React.createElement(RadioGroup, {
-					options: [{
-						name: "Default",
-						value: "default"
-					}, {
-						name: "Windows",
-						value: "win32"
-					}, {
-						name: "OSX",
-						value: "darwin"
-					}, {
-						name: "Linux",
-						value: "linux"
-					}, {
-						name: "TempleOS",
-						value: "temple"
-					}, {
-						name: "HaikuOS",
-						value: "haiku"
-					}, {
-						name: "Web",
-						value: "web"
-					}, {
-						name: "Android",
-						value: "android"
-					}, {
-						name: "iOS",
-						value: "ios"
-					}, {
-						name: "Windows 10 Mobile",
-						value: "wp"
-					}],
-					value: websocket,
-					onChange: e => {
-						if (e.value !== websocket) {
-							setWebsocket(e.value);
-							set("websocket", e.value);
-							webSocketValid = false;
-							if (discordWebSocket) {
-								console.log("[OsSpoof] Killing invalid WebSocket...");
-								discordWebSocket.close(1e3);
-							}
-						}
-					}
-				}));
+			var dist = __webpack_require__(121);
+			var dist_default = __webpack_require__.n(dist);
+			const Platform = external_PluginApi_namespaceObject.WebpackModules.getModule((m => m.platformName && m.platformVersion));
+			function updateSpoofPlatform(spoofPlatform) {
+				console.log("[OsSpoof] Setting UI spoof platform to " + spoofPlatform + "...");
+				Platform.platformName = translatePlatform(spoofPlatform);
+				Platform.platformVersion = versionForPlatform(spoofPlatform);
+				Platform.platformFullVersion = fullVersionForPlatform(spoofPlatform);
+				forceUpdateApp();
 			}
-			var OsSpoof_React = __webpack_require__(113);
-			const OsSpoof_Platform = external_PluginApi_namespaceObject.WebpackModules.getModule((m => m.PlatformTypes?.WINDOWS));
-			const Packer = external_PluginApi_namespaceObject.WebpackModules.getModule((m => m.prototype?.hasOwnProperty("unpack"))).prototype;
+			function getRealPlatform() {
+				return codeFromPlatform(Platform.platformName);
+			}
+			function translatePlatform(platform) {
+				switch (platform) {
+					case "win32":
+						return "Windows";
+					case "darwin":
+						return "Mac OS X";
+					case "linux":
+						return "Linux";
+				}
+			}
+			function codeFromPlatform(platform) {
+				switch (platform) {
+					case "Windows":
+						return "win32";
+					case "Mac OS X":
+					case "Mac OS":
+						return "darwin";
+					case "Linux":
+						return "linux";
+				}
+			}
+			function versionForPlatform(platform) {
+				switch (platform) {
+					case "win32":
+						return "10";
+					case "darwin":
+						return "12";
+					case "linux":
+						return "6";
+				}
+			}
+			function fullVersionForPlatform(platform) {
+				switch (platform) {
+					case "win32":
+						return "10";
+					case "darwin":
+						return "12.0";
+					case "linux":
+						return "6.0";
+				}
+			}
 			let websocketInited = false;
 			const genRanHex = size => [...Array(size)].map((() => Math.floor(16 * Math.random()).toString(16))).join("");
 			class OsSpoof extends(external_BasePlugin_default()) {
 				onStart() {
 					console.log("[OsSpoof] Initializing...");
-					for (const [functionName, platformName] of Object.entries(Platforms)) external_PluginApi_namespaceObject.Patcher.instead(OsSpoof_Platform, `is${functionName}`, (() => get("platform").toLowerCase() === platformName.toLowerCase()));
+					const spoofPlatform = get("platform") || getRealPlatform();
+					updateSpoofPlatform(spoofPlatform);
 					external_PluginApi_namespaceObject.Patcher.before(WebSocket.prototype, "send", ((that, args) => {
 						if (!(args[0] instanceof ArrayBuffer)) return;
-						const data = Packer.unpack(args[0]);
-						if (that.url.startsWith("wss://gateway.discord.gg"))
+						const data = dist_default().unpack(args[0]);
+						if (that.url.startsWith("wss://gateway") && -1 != that.url.indexOf("discord.gg"))
 							if (!webSocketValid) {
 								console.log("[OsSpoof]: Killing invalid WebSocket...");
 								that.close(1e3);
@@ -528,7 +953,7 @@ function buildPlugin([BasePlugin, PluginApi]) {
 							websocketInited = true;
 							discordWebSocket = that;
 						}
-						args[0] = Packer.pack(data);
+						args[0] = dist_default().pack(data);
 						return args;
 					}));
 					forceUpdateApp();
@@ -538,7 +963,14 @@ function buildPlugin([BasePlugin, PluginApi]) {
 					forceUpdateApp();
 				}
 				getSettingsPanel() {
-					return OsSpoof_React.createElement(Settings, null);
+					const panel = this.buildSettingsPanel();
+					panel.addListener(this.updateSettings.bind(this));
+					return panel.getElement();
+				}
+				updateSettings(group, id) {
+					set(group, id);
+					if ("websocket" == group) webSocketValid = false;
+					else if ("platform" == group) updateSpoofPlatform(id);
 				}
 			}
 		})();

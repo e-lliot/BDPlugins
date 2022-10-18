@@ -1,7 +1,6 @@
 # OsSpoof
 
-> Spoofs your client's operating system!
-Based on Kyza's PlatformEmulator.
+> Spoofs your client's operating system! Based on Kyza's PlatformEmulator.
 <hr/>
 
 
