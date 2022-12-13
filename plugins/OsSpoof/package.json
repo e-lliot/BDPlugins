@@ -13,7 +13,7 @@
                 "github_username": "trungnt2910"
             }
         ],
-        "version": "1.0.1",
+        "version": "1.0.2",
         "description": "Spoofs your client's operating system! Based on Kyza's PlatformEmulator.",
         "github": "https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof",
         "github_raw": "https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js"
@@ -52,7 +52,7 @@
         }
     ],
     "changelog": [
-        {"title": "Bugfixes", "type": "fixed", "items": ["Plugin should now work with the new BetterDiscord."]}
+        {"title": "Bugfixes", "type": "fixed", "items": ["Fixed a bug where the plugin fails to load because \"_reactRootContainer\" is null."]}
     ],
     "build": {
         "copy": true,
