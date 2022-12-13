@@ -1,7 +1,7 @@
 /**
  * @name OsSpoof
  * @author Kyza, AduMaster
- * @version 1.0.1
+ * @version 1.0.2
  * @description Spoofs your client's operating system! Based on Kyza's PlatformEmulator.
  * @source https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof
  * @updateUrl https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js
@@ -43,7 +43,7 @@ const config = {
 				"github_username": "trungnt2910"
 			}
 		],
-		"version": "1.0.1",
+		"version": "1.0.2",
 		"description": "Spoofs your client's operating system! Based on Kyza's PlatformEmulator.",
 		"github": "https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof",
 		"github_raw": "https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js"
@@ -121,7 +121,7 @@ const config = {
 		"title": "Bugfixes",
 		"type": "fixed",
 		"items": [
-			"Plugin should now work with the new BetterDiscord."
+			"Fixed a bug where the plugin fails to load because \"_reactRootContainer\" is null."
 		]
 	}],
 	"build": {
@@ -796,7 +796,7 @@ function buildPlugin([BasePlugin, PluginApi]) {
 			const external_BasePlugin_namespaceObject = BasePlugin;
 			var external_BasePlugin_default = __webpack_require__.n(external_BasePlugin_namespaceObject);
 			function forceUpdateApp() {
-				let root = document.getElementById("app-mount")._reactRootContainer._internalRoot.current;
+				let root = document.getElementById("app-mount")?._reactRootContainer?._internalRoot?.current;
 				while (null != root && "App" !== root?.type?.displayName) {
 					root?.stateNode?.forceUpdate?.();
 					root = root.child;
