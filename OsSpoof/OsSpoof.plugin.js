@@ -1,7 +1,7 @@
 /**
  * @name OsSpoof
  * @author Kyza, AduMaster
- * @version 1.0.2
+ * @version 1.0.3
  * @description Spoofs your client's operating system! Based on Kyza's PlatformEmulator.
  * @source https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof
  * @updateUrl https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js
@@ -43,7 +43,7 @@ const config = {
 				"github_username": "trungnt2910"
 			}
 		],
-		"version": "1.0.2",
+		"version": "1.0.3",
 		"description": "Spoofs your client's operating system! Based on Kyza's PlatformEmulator.",
 		"github": "https://github.com/trungnt2910/BDPlugins/tree/master/plugins/OsSpoof",
 		"github_raw": "https://raw.githubusercontent.com/trungnt2910/BDPlugins/compiled/OsSpoof/OsSpoof.plugin.js"
@@ -121,7 +121,7 @@ const config = {
 		"title": "Bugfixes",
 		"type": "fixed",
 		"items": [
-			"Fixed a bug where the plugin fails to load because \"_reactRootContainer\" is null."
+			"Fixed a bug since the recent update from Discord where lodash (`_`) is no longer exposed in the Discord client."
 		]
 	}],
 	"build": {
@@ -802,17 +802,19 @@ function buildPlugin([BasePlugin, PluginApi]) {
 					root = root.child;
 				}
 			}
-			const storage = external_PluginApi_namespaceObject.Utilities.loadData("OsSpoof", "settings", {
+			var storage = external_PluginApi_namespaceObject.Utilities.loadData("OsSpoof", "settings", {
 				platform: "win32",
 				websocket: "default"
 			});
 			function set(path, value) {
-				_.set(storage, path, value);
+				storage[path] = value;
 				external_PluginApi_namespaceObject.Utilities.saveData("OsSpoof", "settings", storage);
 				return storage;
 			}
 			function get(path, defaultValue) {
-				return _.get(external_PluginApi_namespaceObject.Utilities.loadData("OsSpoof", "settings", storage), path, defaultValue);
+				storage = external_PluginApi_namespaceObject.Utilities.loadData("OsSpoof", "settings");
+				if (void 0 === storage[path]) return defaultValue;
+				return storage[path];
 			}
 			let webSocketValid = false;
 			let discordWebSocket;
