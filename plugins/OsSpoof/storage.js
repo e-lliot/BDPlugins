@@ -1,20 +1,20 @@
 import { Utilities } from "@zlibrary";
 
-const storage = Utilities.loadData("OsSpoof", "settings", {
+var storage = Utilities.loadData("OsSpoof", "settings", {
 	platform: "win32",
 	websocket: "default",
 });
 
 export function set(path, value) {
-	_.set(storage, path, value);
+	storage[path] = value;
 	Utilities.saveData("OsSpoof", "settings", storage);
 	return storage;
 }
 
 export function get(path, defaultValue) {
-	return _.get(
-		Utilities.loadData("OsSpoof", "settings", storage),
-		path,
-		defaultValue
-	);
+	storage = Utilities.loadData("OsSpoof", "settings");
+	if (storage[path] === undefined) {
+		return defaultValue;
+	}
+	return storage[path];
 }
