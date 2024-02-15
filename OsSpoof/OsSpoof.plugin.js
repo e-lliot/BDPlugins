@@ -113,6 +113,14 @@ const config = {
 				{
 					"name": "Windows 10 Mobile",
 					"value": "wp"
+				},
+				{
+					"name": "Xbox ekeserkesekes",
+					"value": "xbox"
+				},
+				{
+					"name": "Playstation faiive",
+					"value": "ps"
 				}
 			]
 		}
@@ -949,6 +957,18 @@ function buildPlugin([BasePlugin, PluginApi]) {
 									data.d.properties = {
 										browser: "Discord Android",
 										os: "Windows Phone"
+									};
+									break;
+								case "xbox":
+									data.d.properties = {
+										browser: "Discord Xbox",
+										os: "Xbox"
+									};
+									break;
+								case "ps":
+									data.d.properties = {
+										browser: "Discord Playstation",
+										os: "Playstation"
 									};
 									break;
 							}
